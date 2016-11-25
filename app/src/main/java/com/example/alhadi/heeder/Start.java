@@ -1,5 +1,7 @@
 package com.example.alhadi.heeder;
 
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.Activity;
@@ -11,6 +13,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -117,7 +120,6 @@ public class Start extends AppCompatActivity implements SensorEventListener {
         textView9.setText(Float.toString(lastY));
 
         textView10.setText(Float.toString(lastZ));
-
         textView6.setText(Float.toString(fallSV()));
 
 
@@ -132,43 +134,42 @@ public class Start extends AppCompatActivity implements SensorEventListener {
                 max=  SV[i];
             }
         }
-        if (max>Csv){
-            send_message();
-            return max;}
+        if ( max > Csv){
+            new SMS().execute(null, null, null);
+            return max;
+        }
         else {
             return 0;
         }
     }
 
-
-
-
-   public float fallOV (){
-
-       float Ox = (float) (acos(lastX/sv)*180/M_PI);
-       float Oy = (float) (acos(lastY/sv)*180/M_PI);
-       float Oz = (float) (acos(lastZ/sv)*180/M_PI);
-
-       float max2= (float) SV[0];
-       for (int i=1;i<100;i++){
-           if ((float)SV[i] > max2){
-               max2 = (float) SV[i];
-           }
-       }
-       if (max2>Csv){
-           return max2;}
-       else {
-           return 0;
-       }
-   }
     public void send_message() {
         SmsManager sms = SmsManager.getDefault();
         //how to call it??
-        String number = Contacts.phoneNo;//the number you want to send to and must b called from picked contact
+        String number = getPhoneNumber();//the number you want to send to and must b called from picked contact
         sms.sendTextMessage(number, null, "the message to be sent", null, null);
-        Toast.makeText(this, "I need help I just fell" + number, Toast.LENGTH_LONG).show();
 
     }
+    public String getPhoneNumber(){
+        SharedPreferences sharedPref = getSharedPreferences("app", Context.MODE_PRIVATE);
+        String phoneNum =  sharedPref.getString("phone", "0991008201");
+        Log.i("hind", "phone is " + phoneNum);
+        return phoneNum;
+    }
+    public class SMS extends AsyncTask<String,String,String>{
 
+        @Override
+        protected String doInBackground(String... strings) {
+            Log.i("hind", "sending the number to" + getPhoneNumber());
+            send_message();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Toast.makeText(Start.this, "Message has been sent", Toast.LENGTH_SHORT).show();
+            super.onPostExecute(s);
+        }
+    }
 
 }

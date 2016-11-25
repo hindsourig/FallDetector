@@ -87,13 +87,13 @@ public class Contacts extends AppCompatActivity {
             Snackbar.make(findViewById(android.R.id.content), "name" + ": " + name, Snackbar.LENGTH_SHORT).show();
             // Set the value to the textviews
             phone_num.setText(phoneNo.replace(" ", "").replaceAll("\\s+", "").replaceAll("\\W+", ""));
+            SharedPreferences.Editor editor = getSharedPreferences("app", MODE_PRIVATE).edit();
+            editor.putString("phone", phoneNo);
+            editor.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-//        SharedPreferences.Editor editor = getSharedPreferences(Contacts, MODE_PRIVATE).edit();
-//        editor.putInt(String.valueOf(phone_num), 12);
-//        editor.commit();
     }
 
 //    @Override
