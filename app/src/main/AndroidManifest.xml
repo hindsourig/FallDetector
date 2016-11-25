@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.example.alhadi.heeder">
+    <user-permission android:name="android.permission.Read_CONTACTS"/>
+
+    <application
+        android:allowBackup="true"
+
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Start"/>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+
+        <activity android:name=".Settings"/>
+
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+
+            <category android:name="android.intent.category.DEFAULT"/>
+        </intent-filter>
+
+        <activity android:name=".Contacts"/>
+
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+
+            <category android:name="android.intent.category.DEFAULT"/>
+        </intent-filter>
+
+        <activity android:name=".History">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".ToneAlert">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--<service-->
+            <!--android:name=".FallDet"-->
+            <!--android:enabled="true"-->
+            <!--android:exported="true"/>-->
+
+        <activity android:name=".NotSounds"/>
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+
+
+    </application>
+    <uses-sdk android:minSdkVersion="10"/>
+
+    <user-permission android:name="android.permission.Read_CONTACTS"/>
+
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+
+
+</manifest>
