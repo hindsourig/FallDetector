@@ -32,6 +32,7 @@ public class Contacts extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int x;
         setContentView(R.layout.activity_contacts);
         phone_num = (TextView) findViewById(R.id.input_phone_num);
         Button btn_contact = (Button) findViewById(R.id.button7);
